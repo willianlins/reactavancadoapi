@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_page_seaction_concepts",
+  "info": {
+    "displayName": "seactionConcepts",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "concepts": {
+      "displayName": "concepts",
+      "type": "component",
+      "repeatable": true,
+      "component": "page.concepts"
+    }
+  }
+}
