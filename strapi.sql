@@ -33,18 +33,18 @@ ALTER TABLE IF EXISTS ONLY public."users-permissions_permission" DROP CONSTRAINT
 ALTER TABLE IF EXISTS ONLY public.upload_file DROP CONSTRAINT IF EXISTS upload_file_pkey;
 ALTER TABLE IF EXISTS ONLY public.upload_file_morph DROP CONSTRAINT IF EXISTS upload_file_morph_pkey;
 ALTER TABLE IF EXISTS ONLY public.strapi_webhooks DROP CONSTRAINT IF EXISTS strapi_webhooks_pkey;
-ALTER TABLE IF EXISTS ONLY public.landing_pages DROP CONSTRAINT IF EXISTS landing_pages_pkey;
+ALTER TABLE IF EXISTS ONLY public.landing_pages DROP CONSTRAINT IF EXISTS landing_pages_pkey CASCADE;
 ALTER TABLE IF EXISTS ONLY public.landing_pages_components DROP CONSTRAINT IF EXISTS landing_pages_components_pkey;
 ALTER TABLE IF EXISTS ONLY public.core_store DROP CONSTRAINT IF EXISTS core_store_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_tech_icons DROP CONSTRAINT IF EXISTS components_page_tech_icons_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_social_links DROP CONSTRAINT IF EXISTS components_page_social_links_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_teches DROP CONSTRAINT IF EXISTS components_page_section_teches_pkey CASCADE;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_teches_components DROP CONSTRAINT IF EXISTS components_page_section_teches_components_pkey;
-ALTER TABLE IF EXISTS ONLY public.components_page_section_reviews DROP CONSTRAINT IF EXISTS components_page_section_reviews_pkey;
+ALTER TABLE IF EXISTS ONLY public.components_page_section_reviews DROP CONSTRAINT IF EXISTS components_page_section_reviews_pkey CASCADE;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_reviews_components DROP CONSTRAINT IF EXISTS components_page_section_reviews_components_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_modules DROP CONSTRAINT IF EXISTS components_page_section_modules_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_modules_components DROP CONSTRAINT IF EXISTS components_page_section_modules_components_pkey;
-ALTER TABLE IF EXISTS ONLY public.components_page_section_faqs DROP CONSTRAINT IF EXISTS components_page_section_faqs_pkey;
+ALTER TABLE IF EXISTS ONLY public.components_page_section_faqs DROP CONSTRAINT IF EXISTS components_page_section_faqs_pkey CASCADE;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_faqs_components DROP CONSTRAINT IF EXISTS components_page_section_faqs_components_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_concepts DROP CONSTRAINT IF EXISTS components_page_section_concepts_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_section_concepts_components DROP CONSTRAINT IF EXISTS components_page_section_concepts_components_pkey;
@@ -54,10 +54,10 @@ ALTER TABLE IF EXISTS ONLY public.components_page_section_aboutuses__authors DRO
 ALTER TABLE IF EXISTS ONLY public.components_page_section_about_projects DROP CONSTRAINT IF EXISTS components_page_section_about_projects_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_reviews DROP CONSTRAINT IF EXISTS components_page_reviews_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_questions DROP CONSTRAINT IF EXISTS components_page_questions_pkey;
-ALTER TABLE IF EXISTS ONLY public.components_page_pricing_boxes DROP CONSTRAINT IF EXISTS components_page_pricing_boxes_pkey;
+ALTER TABLE IF EXISTS ONLY public.components_page_pricing_boxes DROP CONSTRAINT IF EXISTS components_page_pricing_boxes_pkey CASCADE;
 ALTER TABLE IF EXISTS ONLY public.components_page_pricing_boxes_components DROP CONSTRAINT IF EXISTS components_page_pricing_boxes_components_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_modules DROP CONSTRAINT IF EXISTS components_page_modules_pkey;
-ALTER TABLE IF EXISTS ONLY public.components_page_headers DROP CONSTRAINT IF EXISTS components_page_headers_pkey;
+ALTER TABLE IF EXISTS ONLY public.components_page_headers DROP CONSTRAINT IF EXISTS components_page_headers_pkey CASCADE;
 ALTER TABLE IF EXISTS ONLY public.components_page_headers_components DROP CONSTRAINT IF EXISTS components_page_headers_components_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_concepts DROP CONSTRAINT IF EXISTS components_page_concepts_pkey;
 ALTER TABLE IF EXISTS ONLY public.components_page_buttons DROP CONSTRAINT IF EXISTS components_page_buttons_pkey;
@@ -1205,7 +1205,8 @@ CREATE TABLE public.landing_pages_components (
     "order" integer NOT NULL,
     component_type character varying(255) NOT NULL,
     component_id integer NOT NULL,
-    landing_page_id integer NOT NULL
+    landing_page_id integer NOT NULL,
+    entity_id integer NULL
 );
 
 
@@ -2211,7 +2212,7 @@ COPY public.strapi_webhooks (id, name, url, headers, events, enabled) FROM stdin
 -- Data for Name: upload_file; Type: TABLE DATA; Schema: public; Owner: strapi
 --
 
-COPY public.upload_file (id, name, "alternativeText", caption, width, height, formats, hash, ext, mime, size, url, "previewUrl", provider, provider_metadata, created_at, updated_at) FROM stdin;
+COPY public.files (id, name, alternative_text, caption, width, height, formats, hash, ext, mime, size, url, preview_url, provider, provider_metadata, created_at, updated_at) FROM stdin;
 7	guilherme	Um homem sorridente com uma camisa do Flamengo		396	396	{"thumbnail": {"ext": ".png", "url": "/uploads/thumbnail_guilherme_5278e405b4.png", "hash": "thumbnail_guilherme_5278e405b4", "mime": "image/png", "path": null, "size": 60.89, "width": 156, "height": 156}}	guilherme_5278e405b4	.png	image/png	92.72	/uploads/guilherme_5278e405b4.png	\N	local	\N	2020-07-16 20:48:19.754-03	2020-07-16 20:55:37.345-03
 2	typescript			128	129	\N	typescript_8c2d3e5d4f	.svg	image/svg+xml	1.84	/uploads/typescript_8c2d3e5d4f.svg	\N	local	\N	2020-07-16 16:56:51.155-03	2020-07-16 16:56:51.155-03
 3	douglas-lopes			50	50	\N	douglas_lopes_5c3cea8c4a	.jpeg	image/jpeg	1.14	/uploads/douglas_lopes_5c3cea8c4a.jpeg	\N	local	\N	2020-07-16 20:48:19.706-03	2020-07-16 20:48:19.706-03

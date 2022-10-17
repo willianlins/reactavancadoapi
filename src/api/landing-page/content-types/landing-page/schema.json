@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "landin_pages",
+  "collectionName": "landing_pages",
   "info": {
-    "singularName": "landin-page",
-    "pluralName": "landin-pages",
-    "displayName": "landinPage",
+    "singularName": "landing-page",
+    "pluralName": "landing-pages",
+    "displayName": "landingPage",
     "description": ""
   },
   "options": {

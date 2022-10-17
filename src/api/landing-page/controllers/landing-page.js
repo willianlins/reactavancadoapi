@@ -6,4 +6,4 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::landin-page.landin-page');
+module.exports = createCoreController('api::landing-page.landing-page');
